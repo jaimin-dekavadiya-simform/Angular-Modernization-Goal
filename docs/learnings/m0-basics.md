@@ -61,33 +61,21 @@
 
 **Learn**
 
-- [ ] The component tree: one root component, many children
-  - https://angular.dev/guide/components - Done
-- [ ] The Angular CLI: `ng new`, `ng serve`, `ng build`, `ng generate`, `ng test`
-- [ ] What the build output is (open `dist/` after `ng build`)
-
-**Explore these files** and write one sentence for each:
-
-| File                    | What it does |
-| ----------------------- | ------------ |
-| `src/main.ts`           |              |
-| `src/index.html`        |              |
-| `src/app/app.ts`        |              |
-| `src/app/app.html`      |              |
-| `src/app/app.config.ts` |              |
-| `src/app/app.routes.ts` |              |
-| `angular.json`          |              |
-| `src/app/app.spec.ts`   |              |
+- [✅] The component tree: one root component, many children
+- [✅] The Angular CLI: `ng new`, `ng serve`, `ng build`, `ng generate`, `ng test`
+- [✅] What the build output is (open `dist/` after `ng build`)
 
 **Also notice**
 
-- [ ] This app is **standalone**: components import what they need directly, with no `NgModule`
-- [ ] Look at `app.config.ts`: which change detection provider is used (zone-based or zoneless)? I will come back to this in Milestone 4.
-- [ ] `src/server.ts`, `main.server.ts` and `app.config.server.ts` exist because the project was created with SSR. I can ignore them for now.
+- [✅] This app is **standalone**: components import what they need directly, with no `NgModule`
+- [✅] Look at `app.config.ts`: which change detection provider is used (zone-based or zoneless)? I will come back to this in Milestone 4.
+- [✅] `src/server.ts`, `main.server.ts` and `app.config.server.ts` exist because the project was created with SSR. I can ignore them for now.
 
 **Exercise:** draw the component tree for the finished catalog page (boxes and arrows) before writing any code. Keep the drawing for the "What I built" section.
 
 **My notes**
+
+- - https://angular.dev/guide/components - Done
 
 - **Questions I still have**
 
@@ -99,12 +87,12 @@
 
 **Learn**
 
-- [ ] `ng generate component <name>` and what files it creates
-- [ ] `@Component({ selector, imports, templateUrl, styleUrl })`
-- [ ] The `imports` array: how a component gets access to other components, pipes and directives
-- [ ] Naming and folder conventions (`shared/`, `features/`)
-- [ ] Component styles are scoped to the component by default
-- [ ] `ChangeDetectionStrategy.OnPush` exists (a later topic, do not worry yet)
+- [✅] `ng generate component <name>` and what files it creates
+- [✅] `@Component({ selector, imports, templateUrl, styleUrl })`
+- [✅] The `imports` array: how a component gets access to other components, pipes and directives
+- [✅] Naming and folder conventions (`shared/`, `features/`)
+- [✅] Component styles are scoped to the component by default
+- [✅] `ChangeDetectionStrategy.OnPush` exists (a later topic, do not worry yet)
 
 **Exercise:** generate `ProductCard`, put its tag in `app.html`, and see it render. Then remove it from `imports` and read the error.
 
@@ -127,13 +115,13 @@
 
 **Learn**
 
-- [ ] Interpolation, and what expressions are allowed inside `{{ }}`
-- [ ] Property binding vs. HTML attribute (`[src]` vs. `src`)
-- [ ] Event binding and `$event`
-- [ ] Class and style bindings (`[class.sold-out]="product.stock === 0"`)
-- [ ] Template reference variables (`#box`)
-- [ ] Reading and writing component fields from the template
-- [ ] **Signals as component state:** `signal()`, reading with `count()`, updating with `.set()` / `.update()` (a first taste, Milestone 3 goes deeper)
+- [✅] Interpolation, and what expressions are allowed inside `{{ }}`
+- [✅] Property binding vs. HTML attribute (`[src]` vs. `src`)
+- [✅] Event binding and `$event`
+- [✅] Class and style bindings (`[class.sold-out]="product.stock === 0"`)
+- [✅] Template reference variables (`#box`)
+- [✅] Reading and writing component fields from the template
+- [✅] **Signals as component state:** `signal()`, reading with `count()`, updating with `.set()` / `.update()` (a first taste, Milestone 3 goes deeper)
 
 **Exercise:** build a counter component: a button that increments a number and a second button that resets it. Do it once with a plain field, once with a `signal`.
 
@@ -149,14 +137,22 @@
 
 **Learn**
 
-- [ ] `@if (cond) { ... } @else { ... }`
-- [ ] `@for (item of items; track item.id) { ... } @empty { ... }`
-- [ ] Why `track` is required and why `track item.id` beats `track $index`
-- [ ] The `@for` helpers: `$index`, `$first`, `$last`, `$even`, `$count`
-- [ ] `@switch (value) { @case (...) { ... } @default { ... } }`
-- [ ] How the old `*ngIf` / `*ngFor` look, so I can read legacy code
+- [✅] `@if (cond) { ... } @else { ... }`
+- [✅] `@for (item of items; track item.id) { ... } @empty { ... }`
+- [✅] Why `track` is required and why `track item.id` beats `track $index`
+- [✅] The `@for` helpers: `$index`, `$first`, `$last`, `$even`, `$count`
+- [✅] `@switch (value) { @case (...) { ... } @default { ... } }`
+- [✅] How the old `*ngIf` / `*ngFor` look, so I can read legacy code
 
 **Exercise:** render the product list with `@for`, show an empty state with `@empty`, and show an "Out of stock" badge with `@if`.
+
+**Exercise 2:** build an order tracker that uses all three blocks. In the class, make an `orders` signal holding `{ id, item, status }` objects, where `status` is `'pending' | 'shipped' | 'delivered'`.
+
+- `@for`: list the orders with `track order.id`. Show the number (`$index + 1`) and make every even row a different color with `$even`. Show "Last order" next to the final item with `$last`.
+- `@empty`: add a "Clear all" button that sets `orders` to `[]`, and confirm the empty message appears.
+- `@switch`: for each order, show a different badge for `pending`, `shipped` and `delivered`, with a `@default` for unknown values.
+- `@if` / `@else`: show "You have {{ orders().length }} orders" when the list is not empty, and "Nothing to track" otherwise.
+- Check: temporarily change `track order.id` to `track $index`, remove the first order, and note in "Things that broke" what could go wrong. Then rewrite one block with the old `*ngIf` or `*ngFor` to practice reading legacy code.
 
 **My notes**
 
@@ -170,13 +166,13 @@
 
 **Learn**
 
-- [ ] `input<T>()` and `input.required<T>()`: signal-based inputs (read them with `()`)
-- [ ] Passing a value in: `<app-product-card [product]="p" />`
-- [ ] `output<T>()` and `.emit(value)`
-- [ ] Listening in the parent: `(addToCart)="onAdd($event)"`
-- [ ] Why a child should not change the object it received
-- [ ] `computed()` for values derived from inputs (for example `isSoldOut`)
-- [ ] The older `@Input()` / `@Output()` decorators exist; recognise them in old code
+- [✅] `input<T>()` and `input.required<T>()`: signal-based inputs (read them with `()`)
+- [✅] Passing a value in: `<app-product-card [product]="p" />`
+- [✅] `output<T>()` and `.emit(value)`
+- [✅] Listening in the parent: `(addToCart)="onAdd($event)"`
+- [✅] Why a child should not change the object it received
+- [✅] `computed()` for values derived from inputs (for example `isSoldOut`)
+- [✅] The older `@Input()` / `@Output()` decorators exist; recognise them in old code
 
 **Exercise:** `ProductCard` takes `product` (required) and emits `addToCart` with the product. The parent logs it. Then add a `computed` called `isSoldOut` inside the card.
 
@@ -192,13 +188,13 @@
 
 **Learn**
 
-- [ ] Built-ins: `currency`, `date`, `uppercase`, `titlecase`, `percent`, `json`, `slice`
-- [ ] Pipe parameters: `{{ price | currency:'USD' }}`
-- [ ] Chaining pipes
-- [ ] `async` pipe (you will use it properly in Milestone 1)
-- [ ] Writing a custom pipe: `@Pipe({ name: '...' })` with a `transform` method
-- [ ] Pure vs. impure pipes (why pure is the default)
-- [ ] Pipe vs. method call in the template (why a pipe is usually better)
+- [✅] Built-ins: `currency`, `date`, `uppercase`, `titlecase`, `percent`, `json`, `slice`
+- [✅] Pipe parameters: `{{ price | currency:'USD' }}`
+- [✅] Chaining pipes
+- [✅] `async` pipe (you will use it properly in Milestone 1)
+- [✅] Writing a custom pipe: `@Pipe({ name: '...' })` with a `transform` method
+- [✅] Pure vs. impure pipes (why pure is the default)
+- [✅] Pipe vs. method call in the template (why a pipe is usually better)
 
 **Exercise:** write a `priceFormat` pipe that formats `19.5` as `$19.50` and shows `Free` for `0`. Unit test it.
 
@@ -210,12 +206,12 @@
 
 **What to build** (mirrors the roadmap)
 
-- [ ] `Product` interface in `shared/models`
-- [ ] Hard-coded `products` array (10 or more items, include at least one with `stock: 0`)
-- [ ] `ProductCard` component (presentational): `input.required<Product>()`, `output` called `addToCart`
-- [ ] `ProductList` component: renders cards with `@for`, shows an empty state with `@empty`
-- [ ] `priceFormat` pipe
-- [ ] Basic CSS grid layout
+- [✅] `Product` interface in `shared/models`
+- [✅] Hard-coded `products` array (10 or more items, include at least one with `stock: 0`)
+- [✅] `ProductCard` component (presentational): `input.required<Product>()`, `output` called `addToCart`
+- [✅] `ProductList` component: renders cards with `@for`, shows an empty state with `@empty`
+- [✅] `priceFormat` pipe
+- [✅] Basic CSS grid layout
 - [ ] Parent logs the product when "Add" is clicked
 
 **Suggested folders**
